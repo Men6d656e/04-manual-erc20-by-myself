@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTK Workspace | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="app-body">
+    <nav class="navbar">
+        <div class="logo">MTK Workspace</div>
+        <div class="wallet-status">
+            <span id="network-badge" class="badge">Disconnected</span>
+            <button id="connect-wallet-btn" class="btn-secondary">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Status Logger -->
+        <div id="notification-area" class="notification hidden"></div>
+
+        <!-- Token Meta Info -->
+        <section class="panel meta-panel">
+            <h2>Token Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-label">Name</span>
+                    <span class="stat-value" id="token-name">Loading...</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Symbol</span>
+                    <span class="stat-value" id="token-symbol">Loading...</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Total Supply</span>
+                    <span class="stat-value" id="token-supply">Loading...</span>
+                </div>
+                <div class="stat-box highlight-box">
+                    <span class="stat-label">Your Balance</span>
+                    <span class="stat-value" id="user-balance">0.0</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="actions-grid">
+            <!-- Transfer Section -->
+            <section class="panel action-panel">
+                <h3>Transfer Tokens</h3>
+                <form id="transfer-form" class="action-form">
+                    <div class="form-group">
+                        <label for="transfer-to">Recipient Address</label>
+                        <input type="text" id="transfer-to" placeholder="0x..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transfer-amount">Amount (MTK)</label>
+                        <input type="number" id="transfer-amount" step="0.000000000000000001" placeholder="0.0"
+                            required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="transfer-btn">Send MTK</button>
+                </form>
+            </section>
+
+            <!-- Allowance/Approval Section -->
+            <section class="panel action-panel">
+                <h3>Approve Spender</h3>
+                <form id="approve-form" class="action-form">
+                    <div class="form-group">
+                        <label for="approve-spender">Spender Address</label>
+                        <input type="text" id="approve-spender" placeholder="0x..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="approve-amount">Amount (MTK)</label>
+                        <input type="number" id="approve-amount" step="0.000000000000000001" placeholder="0.0" required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="approve-btn">Approve</button>
+                </form>
+            </section>
+
+            <!-- Delegated Transfer Section -->
+            <section class="panel action-panel">
+                <h3>Delegated Transfer</h3>
+                <form id="transferFrom-form" class="action-form">
+                    <div class="form-group">
+                        <label for="transferFrom-from">From Address</label>
+                        <input type="text" id="transferFrom-from" placeholder="0x..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transferFrom-to">To Address</label>
+                        <input type="text" id="transferFrom-to" placeholder="0x..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transferFrom-amount">Amount (MTK)</label>
+                        <input type="number" id="transferFrom-amount" step="0.000000000000000001" placeholder="0.0"
+                            required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="transferFrom-btn">Transfer From</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Import ethers.js v6 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
