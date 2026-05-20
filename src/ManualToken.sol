@@ -48,7 +48,10 @@ contract ManualToken {
      * @param _value The amount to be transferred.
      * @return success A boolean that indicates if the operation was successful.
      */
-    function transfer(address _to, uint256 _value) returns (bool success) {
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
         require(_to != address(0), "ERC20: transfer to the zero address");
         require(
             balanceOf[msg.sender] >= _value,
@@ -103,5 +106,11 @@ contract ManualToken {
             "ERC20: insufficient allowance"
         );
 
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        allowance[_from][msg.sender] -= _value;
+
+        emit Transfer(_from, _to, _value);
+        return true;
     }
 }
