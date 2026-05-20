@@ -19,7 +19,9 @@ deploy-anvil:
 	PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
 	forge script script/DeployManualToken.s.sol:DeployManualToken \
 		--rpc-url http://127.0.0.1:8545 \
-		--broadcast -vvvv
+		--broadcast -vvvv \
+		--force
+
 
 deploy-sepolia:
 	@echo "Deploying to Sepolia testnet..."
@@ -33,4 +35,5 @@ deploy-sepolia:
 		--broadcast \
 		--verify \
 		--etherscan-api-key $(ETHERSCAN_API_KEY) \
-		-vvvv
+		-vvvv \
+		--force

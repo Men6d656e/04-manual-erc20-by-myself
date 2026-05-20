@@ -1,66 +1,98 @@
-## Foundry
+# 🚀 Manual ERC-20 Token & dApp Workspace
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository features a fully manual implementation of the ERC-20 token standard written in Solidity from scratch—without relying on any external libraries like OpenZeppelin. Paired with a beautiful, dark-themed vanilla JavaScript frontend, this project demonstrates core token mechanics, state management, and modern Web3 frontend integration.
 
-Foundry consists of:
+## 🌟 Key Features
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+*   **Pure Solidity Implementation:** A completely manual ERC-20 contract (`ManualToken.sol`) demonstrating a fundamental understanding of Ethereum token standards.
+*   **Fully Standard Compliant:** Implements all core ERC-20 functions (`transfer`, `approve`, `transferFrom`, `balanceOf`, `allowance`) and standard events.
+*   **Vanilla JS Frontend:** A lightweight, professional dashboard utilizing **Ethers.js v6** for direct blockchain interaction without complex frontend frameworks.
+*   **"Terminal Elegance" UI:** Dark-themed, glassmorphic design providing a premium developer experience.
+*   **Comprehensive Testing:** Fully tested using **Foundry** to guarantee robust smart contract logic.
+*   **Make Automation:** Easy-to-use Makefile targets for testing, compiling, and deploying to Anvil or Sepolia.
 
-## Documentation
+---
 
-https://book.getfoundry.sh/
+## 🏗️ Project Structure
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```text
+.
+├── Makefile                   # Automation commands for tests and deployments
+├── foundry.toml               # Foundry configuration
+├── src/
+│   └── ManualToken.sol        # Pure, manual ERC-20 contract
+├── script/
+│   └── DeployManualToken.s.sol# Foundry deployment script
+├── test/
+│   └── ManualToken.t.sol      # Foundry test cases
+└── frontend/
+    ├── index.html             # Landing Page
+    ├── app.html               # dApp Dashboard
+    ├── css/style.css          # Unified dark-theme styling
+    └── js/
+        ├── config.js          # ABI & Contract configurations
+        └── app.js             # Vanilla JS Ethers.js integration
 ```
 
-### Test
+---
 
-```shell
-$ forge test
+## 🛠️ Quick Start Guide
+
+### 1. Prerequisites
+*   [Foundry](https://book.getfoundry.sh/) installed.
+*   Node.js (optional, for local HTTP serving).
+*   MetaMask (or compatible Web3 wallet) installed in your browser.
+
+### 2. Local Setup & Testing
+
+Compile the smart contracts:
+```bash
+make build
 ```
 
-### Format
-
-```shell
-$ forge fmt
+Run the exhaustive test suite:
+```bash
+make test
 ```
 
-### Gas Snapshots
+### 3. Deploying to Local Anvil Node
 
-```shell
-$ forge snapshot
+1. Open a new terminal window and start the local Anvil chain:
+   ```bash
+   anvil
+   ```
+2. In your project directory, deploy the contract locally:
+   ```bash
+   make deploy-anvil
+   ```
+3. Copy the deployed contract address from the terminal output and paste it into `frontend/js/config.js` under `CONTRACT_ADDRESS`.
+
+### 4. Deploying to Sepolia Testnet
+
+Create a `.env` file in the root directory:
+```env
+PRIVATE_KEY=your_wallet_private_key
+SEPOLIA_RPC_URL=your_alchemy_or_infura_rpc_url
+ETHERSCAN_API_KEY=your_etherscan_api_key
 ```
 
-### Anvil
-
-```shell
-$ anvil
+Run the deployment target:
+```bash
+make deploy-sepolia
 ```
 
-### Deploy
+### 5. Running the Frontend
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+To avoid CORS issues and properly test wallet injections, serve the frontend directory via a local web server:
+
+Using Python:
+```bash
+python3 -m http.server 8000 --directory frontend
 ```
+Navigate to `http://localhost:8000` in your web browser. Ensure your wallet network matches your deployment target (Localhost 8545 or Sepolia)!
 
-### Cast
+---
 
-```shell
-$ cast <subcommand>
-```
+## 🛡️ License
 
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This project is licensed under the **MIT License**.
